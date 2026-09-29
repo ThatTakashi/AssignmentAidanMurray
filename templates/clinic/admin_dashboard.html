@@ -1,0 +1,109 @@
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, Administrator!</p>
+</div>
+
+<div class="card">
+    <h3>Quick Actions</h3>
+    <a href="{% url 'admin_add_doctor' %}" class="btn">Add Doctor</a>
+    <a href="{% url 'admin_add_slot' %}" class="btn">Add Appointment Slot</a>
+    <a href="{% url 'admin_manage_users' %}" class="btn">Manage Users</a>
+</div>
+
+<div class="card">
+    <h3>Doctors ({{ doctors.count }})</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Specialty</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+            <tr>
+                <td>{{ doctor.name }}</td>
+                <td>{{ doctor.specialty }}</td>
+                <td>{{ doctor.email }}</td>
+                <td>
+                    <a href="{% url 'admin_edit_doctor' doctor.id %}" class="btn">Edit</a>
+                    <a href="{% url 'admin_delete_doctor' doctor.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No doctors found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>All Appointments ({{ appointments.count }})</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.patient.username }}</td>
+                <td>{{ appointment.slot.doctor.name }}</td>
+                <td>{{ appointment.slot.date }}</td>
+                <td>{{ appointment.slot.start_time }}</td>
+                <td>{{ appointment.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'admin_edit_appointment' appointment.id %}" class="btn">Edit</a>
+                    {% if appointment.status == 'scheduled' %}
+                        <a href="{% url 'admin_cancel_appointment' appointment.id %}" class="btn btn-danger">Cancel</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No appointments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>Patients ({{ patients.count }})</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Staff</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                <td>{{ patient.username }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{% if patient.is_staff %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No patients found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
