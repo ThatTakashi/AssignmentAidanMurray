@@ -1,0 +1,15 @@
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to Piki Ora Medical Centre</h2>
+    <p>Your trusted healthcare provider. Book appointments with our experienced doctors easily online.</p>
+    <br>
+    {% if user.is_authenticated %}
+        <a href="{% url 'patient_dashboard' %}" class="btn">Go to Dashboard</a>
+    {% else %}
+        <a href="{% url 'register' %}" class="btn">Register</a>
+        <a href="{% url 'login' %}" class="btn">Login</a>
+    {% endif %}
+</div>
+{% endblock %}
