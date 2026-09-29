@@ -174,3 +174,12 @@ def admin_cancel_appointment(request, appointment_id):
 
     return render(request, 'clinic/admin_cancel_appointment.html', {'appointment': appointment})
 
+@login_required
+def admin_manage_users(request):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    users = request.user.__class__.objects.all()
+    return render(request, 'clinic/admin_manage_users.html', {'users': users})
+
