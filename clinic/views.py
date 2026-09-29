@@ -41,3 +41,20 @@ def user_logout(request):
     logout(request)
     messages.success(request, 'You have been logged out!')
     return redirect('login')
+
+# ---- Admin Views ----
+@login_required
+def admin_dashboard(request):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    doctors = Doctor.objects.all()
+    appointments = Appointment.objects.all()
+    patients = request.user.__class__.objects.all()
+
+    return render(request, 'clinic/admin_dashboard.html', {
+        'doctors': doctors,
+        'appointments': appointments,
+        'patients': patients
+    })
