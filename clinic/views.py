@@ -83,6 +83,21 @@ def admin_add_doctor(request):
     return render(request, 'clinic/admin_add_doctor.html')
 
 @login_required
+def admin_delete_doctor(request, doctor_id):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+
+    if request.method == 'POST':
+        doctor.delete()
+        messages.success(request, 'Doctor deleted successfully!')
+        return redirect('admin_dashboard')
+
+    return render(request, 'clinic/admin_delete_doctor.html', {'doctor': doctor})
+
+@login_required
 def admin_edit_doctor(request, doctor_id):
     if not request.user.is_staff:
         messages.error(request, 'You do not have permission to access this page.')
