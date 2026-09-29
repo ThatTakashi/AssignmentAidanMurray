@@ -81,3 +81,22 @@ def admin_add_doctor(request):
         return redirect('admin_dashboard')
 
     return render(request, 'clinic/admin_add_doctor.html')
+
+@login_required
+def admin_edit_doctor(request, doctor_id):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+
+    if request.method == 'POST':
+        doctor.name = request.POST.get('name')
+        doctor.speciality = request.POST.get('speciality')
+        doctor.email = request.POST.get('email')
+        doctor.phone = request.POST.get('phone')
+        doctor.save()
+        messages.success(request, 'Doctor updated successfully!')
+        return redirect('admin_dashboard')
+
+    return render(request, 'clinic/admin_edit_doctor.html', {'doctor': doctor})

@@ -1,0 +1,28 @@
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Edit Doctor</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ doctor.name }}" required>
+        </div>
+        <div class="form-group">
+            <label>Specialty:</label>
+            <input type="text" name="specialty" value="{{ doctor.specialty }}" required>
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ doctor.email }}" required>
+        </div>
+        <div class="form-group">
+            <label>Phone:</label>
+            <input type="text" name="phone" value="{{ doctor.phone }}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Update Doctor</button>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+{% endblock %}
