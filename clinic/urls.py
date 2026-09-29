@@ -23,5 +23,5 @@ urlpatterns = [
 
     # --- Patient Views ---
     path('patient/dashboard/', views.patient_dashboard, name='patient_dashboard'),
-    path('patient/doctors/', views.patient_doctors, name='patient_doctors'),
+    path('patient/doctors/', views.view_doctors, name='view_doctors'),
 ]
