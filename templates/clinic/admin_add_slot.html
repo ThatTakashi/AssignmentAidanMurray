@@ -1,0 +1,33 @@
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Add Appointment Slot</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Doctor:</label>
+            <select name="doctor" required>
+                <option value="">Select a doctor</option>
+                {% for doctor in doctors %}
+                <option value="{{ doctor.id }}">{{ doctor.name }} - {{ doctor.specialty }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Date:</label>
+            <input type="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <label>Start Time:</label>
+            <input type="time" name="start_time" required>
+        </div>
+        <div class="form-group">
+            <label>End Time:</label>
+            <input type="time" name="end_time" required>
+        </div>
+        <button type="submit" class="btn btn-success">Add Slot</button>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+{% endblock %}

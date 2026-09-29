@@ -115,3 +115,29 @@ def admin_edit_doctor(request, doctor_id):
         return redirect('admin_dashboard')
 
     return render(request, 'clinic/admin_edit_doctor.html', {'doctor': doctor})
+
+@login_required
+def admin_add_slot(request):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    if request.method == 'POST':
+        doctor_id = request.POST.get('doctor_id')
+        date = request.POST.get('date')
+        start_time = request.POST.get('start_time')
+        end_time = request.POST.get('end_time')
+
+        doctor = get_object_or_404(Doctor, id=doctor_id)
+
+        AppointmentSlot.objects.create(
+            doctor = doctor,
+            date = date,
+            start_time = start_time,
+            end_time = end_time
+        )
+        messages.success(request, 'Slot added successfully!')
+        return redirect('admin_dashboard')
+
+    doctors = Doctor.objects.all()
+    return render(request, 'clinic/admin_add_slot.html', {'doctors': doctors})
