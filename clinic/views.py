@@ -141,3 +141,36 @@ def admin_add_slot(request):
 
     doctors = Doctor.objects.all()
     return render(request, 'clinic/admin_add_slot.html', {'doctors': doctors})
+
+@login_required
+def admin_edit_appointment(request, appointment_id):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    if request.method == 'POST':
+        appointment.status = request.POST.get('status')
+        appointment.save()
+        messages.success(request, 'Appointment updated successfully!')
+        return redirect('admin_dashboard')
+
+    return render(request, 'clinic/admin_edit_appointment.html', {'appointment': appointment})
+
+@login_required
+def admin_cancel_appointment(request, appointment_id):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    if request.method == 'POST':
+        appointment.status = 'cancelled'
+        appointment.save()
+        messages.success(request, 'Appointment cancelled successfully!')
+        return redirect('admin_dashboard')
+
+    return render(request, 'clinic/admin_cancel_appointment.html', {'appointment': appointment})
+
