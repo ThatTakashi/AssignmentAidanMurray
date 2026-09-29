@@ -58,3 +58,26 @@ def admin_dashboard(request):
         'appointments': appointments,
         'patients': patients
     })
+
+@login_required
+def admin_add_doctor(request):
+    if not request.user.is_staff:
+        messages.error(request, 'You do not have permission to access this page.')
+        return redirect('patient_dashboard')
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        speciality = request.POST.get('speciality')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+
+        Doctor.objects.create(
+            name=name,
+            speciality=speciality,
+            email=email,
+            phone=phone
+        )
+        messages.success(request, 'Doctor added successfully!')
+        return redirect('admin_dashboard')
+
+    return render(request, 'clinic/admin_add_doctor.html')
