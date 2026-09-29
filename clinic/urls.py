@@ -20,4 +20,8 @@ urlpatterns = [
     path('admin/add-doctor/', views.admin_add_doctor, name='admin_add_doctor'),
     path('admin/edit-doctor/<int:doctor_id>/', views.admin_edit_doctor, name='admin_edit_doctor'),
     path('admin/delete-doctor/<int:doctor_id>/', views.admin_delete_doctor, name='admin_delete_doctor'),
+
+    # --- Patient Views ---
+    path('patient/dashboard/', views.patient_dashboard, name='patient_dashboard'),
+    path('patient/doctors/', views.patient_doctors, name='patient_doctors'),
 ]

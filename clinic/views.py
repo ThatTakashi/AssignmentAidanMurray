@@ -183,3 +183,14 @@ def admin_manage_users(request):
     users = request.user.__class__.objects.all()
     return render(request, 'clinic/admin_manage_users.html', {'users': users})
 
+# ---- Patient Views ----
+@login_required
+def patient_dashboard(request):
+    appointments = Appointment.objects.filter(patient=request.user, status='scheduled')
+    return render(request, 'clinic/patient_dashboard.html', {'appointments': appointments})
+
+@login_required
+def view_doctors(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'clinic/view_doctors.html', {'doctors': doctors})
+

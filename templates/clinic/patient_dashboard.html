@@ -1,0 +1,43 @@
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Patient Dashboard</h2>
+    <p>Welcome, {{ user.username }}!</p>
+    <br>
+    <a href="{% url 'view_doctors' %}" class="btn">View Doctors & Book Appointment</a>
+</div>
+
+<div class="card">
+    <h3>Your Upcoming Appointments</h3>
+    {% if appointments %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.slot.doctor.name }}</td>
+                    <td>{{ appointment.slot.date }}</td>
+                    <td>{{ appointment.slot.start_time }} - {{ appointment.slot.end_time }}</td>
+                    <td>{{ appointment.get_status_display }}</td>
+                    <td>
+                        <a href="{% url 'edit_appointment' appointment.id %}" class="btn">Edit</a>
+                        <a href="{% url 'cancel_appointment' appointment.id %}" class="btn btn-danger">Cancel</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No upcoming appointments.</p>
+    {% endif %}
+</div>
+{% endblock %}
