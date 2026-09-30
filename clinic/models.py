@@ -46,10 +46,6 @@ class Appointment(models.Model):
 
     # Validate appointment slot
     def clean(self):
-        # If the slot is not available
-        if self.slot and not self.slot.is_available:
-            raise ValidationError("The selected slot is not available.")
-
         # If the slot is already booked
         if Appointment.objects.filter(slot=self.slot, status='scheduled').exclude(id=self.id).exists():
             raise ValidationError("The selected slot is already booked.")

@@ -123,7 +123,7 @@ def admin_add_slot(request):
         return redirect('patient_dashboard')
 
     if request.method == 'POST':
-        doctor_id = request.POST.get('doctor_id')
+        doctor_id = request.POST.get('doctor')
         date = request.POST.get('date')
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
