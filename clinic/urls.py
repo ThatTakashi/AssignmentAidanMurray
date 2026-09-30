@@ -23,5 +23,9 @@ urlpatterns = [
 
     # --- Patient Views ---
     path('patient/dashboard/', views.patient_dashboard, name='patient_dashboard'),
+    path('patient/book/<int:slot_id>/', views.book_appointment, name='book_appointment'),
+    path('patient/edit/<int:appointment_id>/', views.edit_appointment, name='edit_appointment'),
+    path('patient/cancel/<int:appointment_id>/', views.cancel_appointment, name='cancel_appointment'),
     path('patient/doctors/', views.view_doctors, name='view_doctors'),
+    path('patient/doctors/<int:doctor_id>/slots/', views.view_slots, name='view_slots'),
 ]

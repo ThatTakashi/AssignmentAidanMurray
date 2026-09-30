@@ -1,0 +1,37 @@
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Available Slots for {{ doctor.name }}</h2>
+    <p>Specialty: {{ doctor.speciality }}</p>
+    <br>
+    {% if slots %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for slot in slots %}
+                <tr>
+                    <td>{{ slot.date }}</td>
+                    <td>{{ slot.start_time }}</td>
+                    <td>{{ slot.end_time }}</td>
+                    <td>
+                        <a href="{% url 'book_appointment' slot.id %}" class="btn">Book</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No available slots for this doctor.</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'view_doctors' %}" class="btn">Back to Doctors</a>
+</div>
+{% endblock %}

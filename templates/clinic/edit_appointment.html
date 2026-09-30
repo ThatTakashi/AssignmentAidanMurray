@@ -1,0 +1,20 @@
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Edit Appointment</h2>
+    <p><strong>Doctor:</strong> {{ appointment.slot.doctor.name }}</p>
+    <p><strong>Date:</strong> {{ appointment.slot.date }}</p>
+    <p><strong>Time:</strong> {{ appointment.slot.start_time }} - {{ appointment.slot.end_time }}</p>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Notes:</label>
+            <textarea name="notes" rows="4">{{ appointment.notes }}</textarea>
+        </div>
+        <button type="submit" class="btn">Update</button>
+        <a href="{% url 'patient_dashboard' %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+{% endblock %}

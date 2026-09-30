@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card">
     <h2>Admin Dashboard</h2>
-    <p>Welcome, Administrator!</p>
+    <p>Welcome back, Administrator!</p>
 </div>
 
 <div class="card">
@@ -14,7 +14,7 @@
 </div>
 
 <div class="card">
-    <h3>Doctors ({{ doctors.count }})</h3>
+    <h3>All Doctors ({{ doctors.count }})</h3>
     <table>
         <thead>
             <tr>
@@ -28,7 +28,7 @@
             {% for doctor in doctors %}
             <tr>
                 <td>{{ doctor.name }}</td>
-                <td>{{ doctor.specialty }}</td>
+                <td>{{ doctor.speciality }}</td>
                 <td>{{ doctor.email }}</td>
                 <td>
                     <a href="{% url 'admin_edit_doctor' doctor.id %}" class="btn">Edit</a>
@@ -82,7 +82,7 @@
 </div>
 
 <div class="card">
-    <h3>Patients ({{ patients.count }})</h3>
+    <h3>All Patients ({{ patients.count }})</h3>
     <table>
         <thead>
             <tr>

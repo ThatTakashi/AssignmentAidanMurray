@@ -194,3 +194,53 @@ def view_doctors(request):
     doctors = Doctor.objects.all()
     return render(request, 'clinic/view_doctors.html', {'doctors': doctors})
 
+@login_required
+def view_slots(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    slots = AppointmentSlot.objects.filter(doctor=doctor, is_available=True)
+    return render(request, 'clinic/view_slots.html', {'doctor': doctor, 'slots': slots})
+
+@login_required
+def book_appointment(request, slot_id):
+    slot = get_object_or_404(AppointmentSlot, id=slot_id)
+
+    if request.method == 'POST':
+        try:
+            appointment = Appointment.objects.create(
+                patient = request.user,
+                slot = slot
+            )
+            appointment.save()
+            messages.success(request, 'Appointment booked successfully!')
+            return redirect('patient_dashboard')
+        except ValidationError as e:
+            messages.error(request, str(e))
+
+    return render(request, 'clinic/book_appointment.html', {'slot': slot})
+
+@login_required
+def edit_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id, patient=request.user)
+
+    if request.method == 'POST':
+        new_notes = request.POST.get('notes')
+        appointment.notes = new_notes
+        appointment.save()
+        messages.success(request, 'Appointment updated successfully!')
+        return redirect('patient_dashboard')
+
+    return render(request, 'clinic/edit_appointment.html', {'appointment': appointment})
+
+@login_required
+def cancel_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id, patient=request.user)
+
+    if request.method == 'POST':
+        appointment.status = 'cancelled'
+        appointment.save()
+        messages.success(request, 'Appointment cancelled successfully!')
+        return redirect('patient_dashboard')
+
+    return render(request, 'clinic/cancel_appointment.html', {'appointment': appointment})
+
+
