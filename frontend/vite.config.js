@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Vite config: React plugin + dev server proxy so /api calls
-// are forwarded to the Django backend during local development.
+// Vite config
 export default defineConfig({
   plugins: [react()],
   server: {

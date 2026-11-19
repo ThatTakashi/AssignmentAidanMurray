@@ -1,48 +1,121 @@
 /* Global styles - clean, simple look for the whole app */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f4f6f9;
+  background: #eff4e6;
   color: #222;
 }
-a { color: #1f3a5f; text-decoration: none; }
-a:hover { text-decoration: underline; }
+a {
+  color: #1f3a5f;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+nav {
+  height:75px;
+  background-color: #90a078 !important;
+}
 
 /* Shared building blocks used by every page */
-.container { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
-.card {
-  background: #fff; border-radius: 8px; padding: 20px;
-  margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+.container {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 0 16px;
 }
-table { width: 100%; border-collapse: collapse; }
-th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; }
-th { background: #f0f3f7; }
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 16px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+th {
+  background: #f0f3f7;
+}
 
 input, select, textarea {
-  padding: 8px; border: 1px solid #ccc; border-radius: 4px;
-  font-size: 14px; width: 100%; margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: 10px;
 }
-label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
 
 button, .btn {
-  padding: 8px 14px; border: none; border-radius: 4px;
-  background: #1f3a5f; color: #fff; cursor: pointer; font-size: 14px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 100px;
+  background: #90a078;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
 }
-button:hover, .btn:hover { background: #2c5282; }
-button.danger { background: #e74c3c; }
-button.danger:hover { background: #c0392b; }
-button.success { background: #27ae60; }
-button.success:hover { background: #1e8449; }
-button:disabled { background: #aaa; cursor: not-allowed; }
+button:hover, .btn:hover {
+  background: #626d51;
+}
+button.danger {
+  background: #c8766e;
+}
+button.danger:hover {
+  background: #8b4d46;
+}
+button.success {
+  background: #27ae60;
+}
+button.success:hover {
+  background: #1e8449;
+}
+button:disabled {
+  background: #aaa; cursor: not-allowed;
+}
 
-.error { color: #c0392b; margin: 8px 0; }
-.success-msg { color: #27ae60; margin: 8px 0; }
-.muted { color: #777; font-size: 13px; }
-.row { display: flex; gap: 12px; flex-wrap: wrap; }
-.row > * { flex: 1; min-width: 150px; }
-.tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-.tabs button.active { background: #27ae60; }
-.badge { padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-.badge.scheduled { background: #d5f5e3; color: #1e8449; }
-.badge.cancelled { background: #fadbd8; color: #c0392b; }
+.error {
+  color: #c0392b; margin: 8px 0;
+}
+.success-msg {
+  color: #27ae60; margin: 8px 0;
+}
+.muted {
+  color: #777; font-size: 13px;
+}
+.row {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.row > * {
+  flex: 1; min-width: 150px;
+}
+.tabs {
+  display: flex; gap: 8px; margin-bottom: 16px;
+}
+.tabs button.active {
+  background: #27ae60;
+}
+.badge {
+  padding: 2px 8px; border-radius: 10px; font-size: 12px;
+}
+.badge.scheduled {
+  background: #d5f5e3; color: #1e8449;
+}
+.badge.cancelled {
+  background: #fadbd8; color: #c0392b;
+}
