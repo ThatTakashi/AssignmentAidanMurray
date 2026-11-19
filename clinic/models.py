@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 
-# Create your models here.
 class Doctor(models.Model):
     # Define doctor attributes
     name = models.CharField(max_length=100)
@@ -10,7 +9,7 @@ class Doctor(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
 
-    # String representation of the doctor
+    # String representation of a doctor
     def __str__(self):
         return f"Dr. {self.name} - {self.speciality}"
 
