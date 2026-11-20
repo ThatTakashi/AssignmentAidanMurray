@@ -17,9 +17,13 @@ export default function Login() {
       const user = await login(username, password)
       // Staff go to the admin dashboard, patients to their dashboard
       navigate(user.is_staff ? '/admin' : '/dashboard')
-    } catch {
-      // Display an error if the details the user enters are wrong
-      setError('Invalid username or password.')
+    } catch (err) {
+      // 401 = wrong credentials; anything else (404, network, CORS) shows the status
+      setError(
+        err.response?.status === 401
+          ? 'Invalid username or password.'
+          : `Login failed (error ${err.response?.status || 'network'}). Check the API URL.`
+      )
     }
   }
 
