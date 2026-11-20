@@ -1,5 +1,5 @@
 // AuthContext keeps the logged-in user and JWT tokens in React state
-// (and mirrors tokens to localStorage so they survive page refreshes).
+// (and mirrors tokens to localStorage so they stay between page refreshes).
 import { createContext, useContext, useState, useEffect } from 'react'
 import api from '../api'
 

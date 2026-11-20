@@ -7,8 +7,8 @@ export default function PatientDashboard() {
   const [appointments, setAppointments] = useState([])
   const [error, setError] = useState('')
 
-  // Load appointments from GET /api/appointments/ (backend returns only the current user's appointments automatically)
-  // The admin can see ALL appointments
+  // Load appointments from GET /api/appointments/
+  // Each user can only see their appointments
   const load = () => {
     api.get('/appointments/')
       .then((res) => setAppointments(res.data))
@@ -42,6 +42,7 @@ export default function PatientDashboard() {
       <h2>My Appointments</h2>
       {error && <p className="error">{error}</p>}
       <div className="card">
+        <!-- Check if the user has appointments (if not show a message prompting them to make a booking) -->
         {appointments.length === 0 ? (
           <p className="muted">No appointments yet. <a href="/doctors">Book one here</a>.</p>
         ) : (

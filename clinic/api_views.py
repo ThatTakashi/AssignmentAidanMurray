@@ -44,12 +44,12 @@ def me(request):
 # ---- Doctor endpoints ----
 
 class DoctorViewSet(viewsets.ModelViewSet):
-    """CRUD for doctors. Anyone logged in can list; only admins can modify."""
+    """CRUD for doctors. Anyone logged in can list but only admins can modify."""
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
 
     def get_permissions(self):
-        # Safe methods (GET) need only login; writes need admin
+        # Safe methods (GET) need only login, writes need admin
         if self.action in ['list', 'retrieve']:
             return [IsAuthenticated()]
         return [IsAdminUser()]
@@ -58,7 +58,7 @@ class DoctorViewSet(viewsets.ModelViewSet):
 # ---- Appointment slot endpoints ----
 
 class AppointmentSlotViewSet(viewsets.ModelViewSet):
-    """CRUD for appointment slots. Patients can view; admins manage."""
+    """CRUD for appointment slots. Patients can view, admins manage."""
     queryset = AppointmentSlot.objects.select_related('doctor').all()
     serializer_class = AppointmentSlotSerializer
     # Allow filtering by ?doctor=<id> and ?is_available=true
@@ -69,6 +69,8 @@ class AppointmentSlotViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         # Optional query params: ?doctor=1&is_available=true
+        # Allows filtering by doctor id and if they are available
+        # Needed for the patient dashboard when booking an appointment
         doctor_id = self.request.query_params.get('doctor')
         is_available = self.request.query_params.get('is_available')
         if doctor_id:
@@ -86,11 +88,13 @@ class AppointmentSlotViewSet(viewsets.ModelViewSet):
 # ---- Appointment endpoints ----
 
 class AppointmentViewSet(viewsets.ModelViewSet):
-    """Appointments: patients see/book/cancel their own; admins see all."""
+    """Appointments
+    - Patients see/book/cancel their own
+    - Admins see all appointments."""
     serializer_class = AppointmentSerializer
 
     def get_queryset(self):
-        # Admins see every appointment; patients only their own
+        # Admins see every appointment, patients only their own
         if self.request.user.is_staff:
             return Appointment.objects.select_related(
                 'patient', 'slot__doctor').all()

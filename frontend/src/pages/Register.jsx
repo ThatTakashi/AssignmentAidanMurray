@@ -11,11 +11,14 @@ export default function Register() {
   const { register } = useAuth()
   const navigate = useNavigate()
 
+  // Logic to handle clicking the submit button
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     try {
       await register(username, email, password)
+      // Handles page redirection
+      // All users created here are not admins, thus no admin dashboard logic is needed
       navigate('/dashboard')
     } catch (err) {
       // Show the first validation error returned by the API
@@ -24,10 +27,13 @@ export default function Register() {
     }
   }
 
+
+  // Actual page content, includes the registration form and link to the login page
   return (
     <div className="container" style={{ maxWidth: 400 }}>
       <div className="card">
         <h2>Register</h2>
+        <!-- Registration form elements -->
         <form onSubmit={handleSubmit}>
           <label>Username</label>
           <input value={username} onChange={(e) => setUsername(e.target.value)} required />
@@ -35,6 +41,7 @@ export default function Register() {
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <label>Password (min 8 chars)</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={8} required />
+          <!-- Error element (hidden by default) -->
           {error && <p className="error">{error}</p>}
           <button type="submit" style={{ width: '100%' }}>Register</button>
         </form>

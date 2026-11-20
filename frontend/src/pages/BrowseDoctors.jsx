@@ -37,12 +37,13 @@ export default function BrowseDoctors() {
     }
   }
 
+  // Actual page content
   return (
     <div className="container">
       <h2>Book an Appointment</h2>
       {message && <p className="success-msg">{message}</p>}
 
-      {/* Doctor list */}
+      <!-- Doctor list -->
       <div className="card">
         <h3>1. Choose a Doctor</h3>
         <div className="row">
@@ -59,7 +60,7 @@ export default function BrowseDoctors() {
         </div>
       </div>
 
-      {/* Available slots for the selected doctor */}
+      <!-- Available slots for the selected doctor -->
       {selectedDoctor && (
         <div className="card">
           <h3>2. Choose a Time Slot - Dr. {selectedDoctor.name}</h3>

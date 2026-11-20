@@ -6,15 +6,18 @@ export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
+  // Handle clicking on the logout button from any page
   const handleLogout = () => {
     logout()
     navigate('/login')
   }
 
+  // Navbar component content
   return (
     <nav style={styles.nav}>
       <Link to="/dashboard" style={styles.brand}>Piki Ora Medical Centre</Link>
       <div style={styles.links}>
+        <!-- Check if the user is logged in, display contents based on that -->
         {user ? (
           <>
             <Link to="/dashboard">My Appointments</Link>
@@ -34,7 +37,7 @@ export default function Navbar() {
   )
 }
 
-// Inline styles
+// Inline styles for the navbar component
 const styles = {
   nav: {
     display: 'flex',
@@ -48,12 +51,16 @@ const styles = {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: '18px',
-    textDecoration: 'none' },
+    textDecoration: 'none'
+  },
   links: {
     display: 'flex',
     gap: '16px',
-    alignItems: 'center' },
-  user: { fontStyle: 'italic' },
+    alignItems: 'center'
+  },
+  user: {
+    fontStyle: 'italic'
+  },
   btn: {
     padding: '6px 12px',
     border: 'none',
