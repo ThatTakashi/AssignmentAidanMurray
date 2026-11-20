@@ -28,6 +28,13 @@ def register(request):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
+def health(request):
+    """Public health check used by Render's healthCheckPath."""
+    return Response({'status': 'ok'})
+
+
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def me(request):
     """Return the currently logged-in user's info."""

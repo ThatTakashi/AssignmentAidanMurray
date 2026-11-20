@@ -7,12 +7,17 @@ services:
     runtime: python
     rootDir: .
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
-    startCommand: gunicorn assignmentaidanmurray.wsgi:application
+    # Run migrations then start the API server
+    startCommand: python manage.py migrate && gunicorn assignmentaidanmurray.wsgi:application
+    healthCheckPath: /api/health/
     envVars:
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
         value: "False"
+      # Set this to your API's Render domain after first deploy, e.g. clinic-api.onrender.com
+      - key: ALLOWED_HOSTS
+        sync: false
       - key: DB_NAME
         fromDatabase:
           name: clinic-db

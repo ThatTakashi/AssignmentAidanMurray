@@ -30,7 +30,13 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-gjaxa!j+t2z#=#4bv$=4s
 # DEBUG = True
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver', 'assignmentaidanmurray.onrender.com']
+# Comma-separated list from the ALLOWED_HOSTS env var, with local defaults.
+# On Render, set ALLOWED_HOSTS to your service's domain (e.g. clinic-api.onrender.com)
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='localhost,127.0.0.1,testserver',
+    cast=lambda v: [h.strip() for h in v.split(',')],
+)
 
 
 # Application definition

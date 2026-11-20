@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # Custom auth endpoints
     path('api/register/', api_views.register, name='register'),
+    path('api/health/', api_views.health, name='health'),
     path('api/me/', api_views.me, name='me'),
     # Viewset endpoints: /api/doctors/, /api/slots/, /api/appointments/
     path('api/', include(router.urls)),
