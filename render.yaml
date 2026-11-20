@@ -18,6 +18,13 @@ services:
       # Set this to your API's Render domain after first deploy, e.g. clinic-api.onrender.com
       - key: ALLOWED_HOSTS
         sync: false
+      # Admin account created automatically by the 0002 migration on first deploy
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
       - key: DB_NAME
         fromDatabase:
           name: clinic-db
