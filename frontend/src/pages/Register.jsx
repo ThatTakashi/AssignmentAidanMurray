@@ -33,7 +33,7 @@ export default function Register() {
     <div className="container" style={{ maxWidth: 400 }}>
       <div className="card">
         <h2>Register</h2>
-        <!-- Registration form elements -->
+        {/* Registration form elements */}
         <form onSubmit={handleSubmit}>
           <label>Username</label>
           <input value={username} onChange={(e) => setUsername(e.target.value)} required />
@@ -41,7 +41,7 @@ export default function Register() {
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <label>Password (min 8 chars)</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={8} required />
-          <!-- Error element (hidden by default) -->
+          {/* Error element (hidden by default) */}
           {error && <p className="error">{error}</p>}
           <button type="submit" style={{ width: '100%' }}>Register</button>
         </form>

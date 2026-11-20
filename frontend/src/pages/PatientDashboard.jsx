@@ -42,7 +42,7 @@ export default function PatientDashboard() {
       <h2>My Appointments</h2>
       {error && <p className="error">{error}</p>}
       <div className="card">
-        <!-- Check if the user has appointments (if not show a message prompting them to make a booking) -->
+        {/* Check if the user has appointments (if not show a message prompting them to make a booking) */}
         {appointments.length === 0 ? (
           <p className="muted">No appointments yet. <a href="/doctors">Book one here</a>.</p>
         ) : (

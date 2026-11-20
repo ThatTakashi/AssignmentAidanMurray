@@ -34,13 +34,13 @@ export default function Login() {
     <div className="container" style={{ maxWidth: 400 }}>
       <div className="card">
         <h2>Login</h2>
-        <!-- Login form elements -->
+        {/* Login form elements */}
         <form onSubmit={handleSubmit}>
           <label>Username</label>
           <input value={username} onChange={(e) => setUsername(e.target.value)} required />
           <label>Password</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          <!-- Error element (hidden by default) -->
+          {/* Error element (hidden by default) */}
           {error && <p className="error">{error}</p>}
           <button type="submit" style={{ width: '100%' }}>Login</button>
         </form>

@@ -60,7 +60,7 @@ export default function BrowseDoctors() {
         </div>
       </div>
 
-      <!-- Available slots for the selected doctor -->
+      {/* Available slots for the selected doctor */}
       {selectedDoctor && (
         <div className="card">
           <h3>2. Choose a Time Slot - Dr. {selectedDoctor.name}</h3>
