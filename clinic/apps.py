@@ -35,7 +35,7 @@ class ClinicConfig(AppConfig):
         if created:
             user.set_password(password)
             user.save()
-            print(f'[clinic] Created admin user "{username}" from env vars')
+            print(f'[clinic] Created admin user "{username}" from env')
         elif not user.is_superuser:
             # User exists but isn't admin - promote it and update password
             user.is_staff = True
