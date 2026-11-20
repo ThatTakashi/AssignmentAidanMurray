@@ -1,31 +1,22 @@
-from django.urls import path
-from . import views
+# URL routes for the REST API (replaces the old server-rendered pages).
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from . import api_views
+
+# Router auto-generates CRUD endpoints for each viewset
+router = DefaultRouter()
+router.register(r'doctors', api_views.DoctorViewSet, basename='doctor')
+router.register(r'slots', api_views.AppointmentSlotViewSet, basename='slot')
+router.register(r'appointments', api_views.AppointmentViewSet, basename='appointment')
 
 urlpatterns = [
-    # --- Home ---
-    path('', views.home, name='home'),
-
-    # --- Authentication ---
-    path('register/', views.register, name='register'),
-    path('login/', views.user_login, name='login'),
-    path('logout/', views.user_logout, name='logout'),
-
-    # --- Admin Views ---
-    path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
-    path('admin/add-slot/', views.admin_add_slot, name='admin_add_slot'),
-    path('admin/edit-appointment/<int:appointment_id>/', views.admin_edit_appointment, name='admin_edit_appointment'),
-    path('admin/cancel-appointment/<int:appointment_id>/', views.admin_cancel_appointment, name='admin_cancel_appointment'),
-    path('admin/manage-users/', views.admin_manage_users, name='admin_manage_users'),
-    # Admin Doctor Views
-    path('admin/add-doctor/', views.admin_add_doctor, name='admin_add_doctor'),
-    path('admin/edit-doctor/<int:doctor_id>/', views.admin_edit_doctor, name='admin_edit_doctor'),
-    path('admin/delete-doctor/<int:doctor_id>/', views.admin_delete_doctor, name='admin_delete_doctor'),
-
-    # --- Patient Views ---
-    path('patient/dashboard/', views.patient_dashboard, name='patient_dashboard'),
-    path('patient/book/<int:slot_id>/', views.book_appointment, name='book_appointment'),
-    path('patient/edit/<int:appointment_id>/', views.edit_appointment, name='edit_appointment'),
-    path('patient/cancel/<int:appointment_id>/', views.cancel_appointment, name='cancel_appointment'),
-    path('patient/doctors/', views.view_doctors, name='view_doctors'),
-    path('patient/doctors/<int:doctor_id>/slots/', views.view_slots, name='view_slots'),
+    # JWT login (returns access + refresh tokens) and token refresh
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # Custom auth endpoints
+    path('api/register/', api_views.register, name='register'),
+    path('api/me/', api_views.me, name='me'),
+    # Viewset endpoints: /api/doctors/, /api/slots/, /api/appointments/
+    path('api/', include(router.urls)),
 ]

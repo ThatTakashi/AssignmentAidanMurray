@@ -18,6 +18,7 @@ export default function Login() {
       // Staff go to the admin dashboard, patients to their dashboard
       navigate(user.is_staff ? '/admin' : '/dashboard')
     } catch {
+      // Display an error if the details the user enters are wrong
       setError('Invalid username or password.')
     }
   }
@@ -34,7 +35,7 @@ export default function Login() {
           {error && <p className="error">{error}</p>}
           <button type="submit" style={{ width: '100%' }}>Login</button>
         </form>
-        <p className="muted">No account? <Link to="/register">Register here</Link></p>
+        <p className="muted">No account? <Link to="/register">Register here >></Link></p>
       </div>
     </div>
   )

@@ -36,7 +36,7 @@ export default function App() {
         <Route path="/dashboard" element={<ProtectedRoute><PatientDashboard /></ProtectedRoute>} />
         <Route path="/doctors" element={<ProtectedRoute><BrowseDoctors /></ProtectedRoute>} />
 
-        {/* Administrator dashboard (staff only) - React UI, NOT Django admin */}
+        {/* Administrator dashboard (staff only) */}
         <Route path="/admin" element={<ProtectedRoute><AdminRoute><AdminDashboard /></AdminRoute></ProtectedRoute>} />
 
         {/* Default redirect */}

@@ -38,7 +38,7 @@ export default function Register() {
           {error && <p className="error">{error}</p>}
           <button type="submit" style={{ width: '100%' }}>Register</button>
         </form>
-        <p className="muted">Already registered? <Link to="/login">Login here</Link></p>
+        <p className="muted">Already registered? <Link to="/login">Login here >></Link></p>
       </div>
     </div>
   )
