@@ -29,7 +29,7 @@ def create_admin(apps, schema_editor):
 
     # Skip if the user already exists (safe on redeploys)
     if User.objects.filter(username=username).exists():
-        print(f'Admin user "{username}" already exists - skipping')
+        print(f'Admin user "{username}" already exists')
         return
 
     User.objects.create_superuser(username=username, email=email, password=password)
