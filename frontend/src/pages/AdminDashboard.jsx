@@ -5,6 +5,7 @@ import api from '../api'
 
 export default function AdminDashboard() {
   const [tab, setTab] = useState('doctors')
+  // Create tabs on the admin dashboard page
   return (
     <div className="container">
       <h2>Admin Dashboard</h2>
@@ -27,6 +28,7 @@ function DoctorsTab() {
   const [editingId, setEditingId] = useState(null)
   const [error, setError] = useState('')
 
+  // Load all doctors
   const load = () => api.get('/doctors/').then((r) => setDoctors(r.data)).catch(() => {})
   useEffect(() => { load() }, [])
 
@@ -57,6 +59,7 @@ function DoctorsTab() {
     load()
   }
 
+  // Doctor tab content
   return (
     <>
       <div className="card">
@@ -125,6 +128,7 @@ function SlotsTab() {
     load()
   }
 
+  // Slot tab content
   return (
     <>
       <div className="card">
@@ -173,6 +177,7 @@ function AppointmentsTab() {
   const [appointments, setAppointments] = useState([])
   const [error, setError] = useState('')
 
+  // Get all appointments
   const load = () => api.get('/appointments/').then((r) => setAppointments(r.data)).catch(() => {})
   useEffect(() => { load() }, [])
 
@@ -186,6 +191,7 @@ function AppointmentsTab() {
 
   const cancel = (id) => update(id, { status: 'cancelled' })
 
+  // Appointment tab content
   return (
     <div className="card">
       <h3>All Appointments</h3>

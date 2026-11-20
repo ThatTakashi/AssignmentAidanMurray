@@ -24,10 +24,11 @@ export default function BrowseDoctors() {
       .catch(() => setSlots([]))
   }
 
-  // Book the chosen slot: POST /api/appointments/{ slot: id }
+  // Book the chosen slot using /api/appointments/{ slot: id }
   const book = async (slotId) => {
     setMessage('')
     try {
+      // Try to create a booking for the selected slot
       await api.post('/appointments/', { slot: slotId })
       setMessage('Appointment booked successfully!')
       setTimeout(() => navigate('/dashboard'), 800)
@@ -70,6 +71,7 @@ export default function BrowseDoctors() {
             <table>
               <thead><tr><th>Date</th><th>Start</th><th>End</th><th></th></tr></thead>
               <tbody>
+              {/* Show all of the time slots for the selected doctor in a table */}
                 {slots.map((s) => (
                   <tr key={s.id}>
                     <td>{s.date}</td>
