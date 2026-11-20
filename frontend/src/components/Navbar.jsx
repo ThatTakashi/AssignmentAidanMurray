@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav style={styles.nav}>
       <Link to="/dashboard" style={styles.brand}>Piki Ora Medical Centre</Link>
       <div style={styles.links}>
-        <!-- Check if the user is logged in, display contents based on that -->
+        {/* Check if the user is logged in, display contents based on that */}
         {user ? (
           <>
             <Link to="/dashboard">My Appointments</Link>
