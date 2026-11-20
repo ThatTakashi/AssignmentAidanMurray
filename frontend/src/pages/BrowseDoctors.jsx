@@ -43,7 +43,7 @@ export default function BrowseDoctors() {
       <h2>Book an Appointment</h2>
       {message && <p className="success-msg">{message}</p>}
 
-      <!-- Doctor list -->
+      {/* Doctor list */}
       <div className="card">
         <h3>1. Choose a Doctor</h3>
         <div className="row">
