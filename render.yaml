@@ -7,7 +7,7 @@ services:
     runtime: python
     rootDir: .
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
-    # Run migrations then start the API server
+    # Migrate, create admin + seed data, then start the API server
     startCommand: python manage.py migrate && gunicorn assignmentaidanmurray.wsgi:application
     healthCheckPath: /api/health/
     envVars:
